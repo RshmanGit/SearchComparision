@@ -20,12 +20,23 @@ services:
     networks:
       - elastic
 
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.1
+    environment:
+      SERVER_NAME: kibana.localhost
+      ELASTICSEARCH_HOSTS: http://es01:9200
+      MONITORING_ENABLED: "true"
+    ports:
+      - 5601:5601
+    networks:
+      - elastic
+
   mongodb:
     image: mvertes/alpine-mongo
     ports:
         - 27017:27017
     volumes:
-        - mongodb:/data/db
+        - ./data/mongodb:/data/db
     networks:
         - mongo
 
@@ -40,6 +51,7 @@ services:
             NODE_ENV: development
             MONGODB_HOST: mongodb:27017
             MONGODB_DB: yodawg
+            ES_HOST: es01:9200
         volumes: 
             - ./:/app
         networks:
@@ -49,8 +61,6 @@ services:
 volumes:
   es01:
     driver: local
-  mongodb:
-       name: mongodb
 
 networks:
   elastic:
