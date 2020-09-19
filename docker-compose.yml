@@ -29,6 +29,23 @@ services:
     networks:
         - mongo
 
+  searchservice:
+        build:
+            context: ./
+            args:
+                NODE_ENV: development
+        image: searchservice:dev
+        command: npm run dev
+        environment:
+            NODE_ENV: development
+            MONGODB_HOST: mongodb:27017
+            MONGODB_DB: yodawg
+        volumes: 
+            - ./:/app
+        networks:
+            - elastic
+            - mongo
+
 volumes:
   es01:
     driver: local
