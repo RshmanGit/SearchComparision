@@ -15,7 +15,22 @@ mongoose.connection.on('connected', () => {
 });
 
 const productSchema = new Schema({
+  brand: { type: String, required: true, es_indexed: true },
   name: { type: String, required: true, es_indexed: true },
+  dosage_form: { type: String, required: true },
+});
+
+productSchema.index({
+  brand: 'text',
+  name: 'text',
+  dosage_form: 'text',
+}, {
+  name: 'productIndex',
+  weights: {
+    brand: 5,
+    name: 10,
+    dosage_form: 1,
+  },
 });
 
 productSchema.plugin(mongoosastic, {
