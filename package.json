@@ -1,0 +1,24 @@
+{
+  "name": "search-comparisions",
+  "version": "1.0.0",
+  "description": "Search Comparisions",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RshmanGit/SearchComparision.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RshmanGit/SearchComparision/issues"
+  },
+  "homepage": "https://github.com/RshmanGit/SearchComparision#readme",
+  "dependencies": {
+    "eslint": "^7.9.0",
+    "mongoose": "^5.10.6",
+    "nodemon": "^2.0.4"
+  }
+}
