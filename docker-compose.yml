@@ -1,0 +1,42 @@
+version: '3.6'
+
+services:
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.1
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+
+  mongodb:
+    image: mvertes/alpine-mongo
+    ports:
+        - 27017:27017
+    volumes:
+        - mongodb:/data/db
+    networks:
+        - mongo
+
+volumes:
+  es01:
+    driver: local
+  mongodb:
+       name: mongodb
+
+networks:
+  elastic:
+    driver: bridge
+  mongo:
+    driver: bridge
